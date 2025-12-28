@@ -1,0 +1,8 @@
+[
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/admin/Desktop/ulbyEasyFront/nuxt2-ssr-demo/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
