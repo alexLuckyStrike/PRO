@@ -3,13 +3,13 @@
     <h1>Nuxt 2 SSR Demo</h1>
     <p><strong>Сообщение с сервера:</strong> {{ message }}</p>
     <button @click="refresh">Обновить на клиенте</button>
-    <p class="hint">
-      asyncData выполнен на сервере (SSR), кнопка — на клиенте
-    </p>
+    <p class="hint">asyncData выполнен на сервере (SSR), кнопка — на клиенте</p>
   </div>
 </template>
 
 <script>
+import { fetchPosts } from "~/api/posts.js";
+
 export default {
   async asyncData({ $axios }) {
     console.log("asyncData");
@@ -17,12 +17,10 @@ export default {
     console.log("CLIENT?", process.client);
 
     try {
-      const res = await $axios.$get(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
-      console.log('res:',res)
+      const res = await fetchPosts($axios);
+      console.log("res:", res);
       return {
-        message: res[0].title,
+        message: res && res[0] ? res[0].title : "Нет данных",
       };
     } catch (e) {
       return {
@@ -44,20 +42,24 @@ export default {
       console.log("CLIENT?", process.client);
 
       try {
-        const res = await this.$axios.$get(
-          "https://jsonplaceholder.typicode.com/posts/1"
-        );
-        this.message = res.title;
+        const res = await fetchPosts(this.$axios);
+        this.message = res && res[0] ? res[0].title : "Нет данных";
       } catch (e) {
         this.message = "Ошибка загрузки данных (Client)";
       }
     },
   },
 };
-
 </script>
 
 <style>
-.container { max-width: 600px; margin: 40px auto; font-family: sans-serif; }
-.hint { margin-top: 20px; color: #666; }
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: sans-serif;
+}
+.hint {
+  margin-top: 20px;
+  color: #666;
+}
 </style>

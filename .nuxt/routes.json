@@ -2,7 +2,8 @@
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/admin/Desktop/ulbyEasyFront/nuxt2-ssr-demo/pages/index.vue",
-    "chunkName": "pages/index"
+    "component": "/Users/admin/Desktop/PRO/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_773f14ec"
   }
 ]
