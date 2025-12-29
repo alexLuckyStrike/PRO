@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Nuxt 2 SSR Demo</h1>
-    <p><strong>Сообщение с сервера:</strong> {{ message }}</p>
+    <PostTitle :title="message" />
     <button @click="refresh">Обновить на клиенте</button>
     <p class="hint">asyncData выполнен на сервере (SSR), кнопка — на клиенте</p>
   </div>
@@ -9,8 +9,10 @@
 
 <script>
 import { fetchPosts } from "~/api/posts.js";
+import PostTitle from "~/components/PostTitle.vue";
 
 export default {
+  components: { PostTitle },
   async asyncData({ $axios }) {
     console.log("asyncData");
     console.log("SSR?", process.server);
